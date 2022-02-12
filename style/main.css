@@ -1,0 +1,25 @@
+body{
+    margin: 0;
+    overflow: hidden;
+    background-color: black;
+    font-family: sans-serif;
+}
+
+#tools{
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    color: white;
+}
+
+input{
+    outline: none;
+    border: none;
+}
+
+#go{
+    height: 40px;
+    width: 100px;
+    font-size: 10;
+    font-weight: bold;
+}
