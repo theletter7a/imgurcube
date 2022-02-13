@@ -11,8 +11,9 @@ var links = [];
 for(i=0;i<6;i++){
     loadTextures();
 }
-console.log(links);
 const cube = new THREE.Mesh(geometry, material);
+cube.rotation.y = 0.75;
+cube.rotation.x = 0.5;
 scene.add(cube);
 
 const controls = new THREE.OrbitControls(camera, renderer.domElement);
