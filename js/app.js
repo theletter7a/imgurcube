@@ -41,7 +41,7 @@ document.getElementById('go').addEventListener('click', () => {
 document.getElementById('down').addEventListener('click', () => {
     var chars = '01234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghiklmnopqrstuvwxyz'; 
     var text = '';
-    for (var i = 0; i < 5; i++) {
+    for (var i = 0; i<5; i++) {
         var rand = Math.floor(Math.random() * chars.length);
         text += chars.substring(rand,rand+1);
     }
@@ -84,9 +84,9 @@ function loadTextures() {
 
     
     var image = new Image();
-    image.src = 'https://i.imgur.com/' + text + '.jpg';;
+    image.src = 'https://i.imgur.com/' + text + '.jpg';
     image.onload = function() {
-        if (this.width == 161 && this.height/this.width > .2) {
+        if (this.width == 161 || this.height/this.width <= .4 || this.width/this.height <= .4) {
             loadTextures();
         } else {
             var myHeaders = new Headers();
