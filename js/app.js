@@ -5,6 +5,8 @@ const renderer = new THREE.WebGLRenderer();
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
+var nsfw = false;
+
 const geometry = new THREE.BoxGeometry();
 var material = [];
 var links = [];
@@ -73,6 +75,17 @@ document.getElementById('up').addEventListener('click', () => {
     input.click();
 });
 
+document.getElementById('nsfw').addEventListener('click', () => {
+    if (nsfw){
+        document.getElementById('nsfw').innerHTML = 'NSFW FILTER IS ON';
+        nsfw = false;
+    }
+    else{
+        document.getElementById('nsfw').innerHTML = 'NSFW FILTER IS OFF';
+        nsfw = true;
+    }
+})
+
 function loadTextures() {
     var chars = '01234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghiklmnopqrstuvwxyz'; 
     var text = '';
@@ -96,8 +109,8 @@ function loadTextures() {
                 method: 'GET',
                 headers: myHeaders,
             };
-
-            fetch('https://api.imgur.com/3/image/'+text, requestOptions)
+            if(!nsfw){
+                fetch('https://api.imgur.com/3/image/'+text, requestOptions)
                 .then(response => response.text())
                 .then(result => {
                     if(!JSON.parse(result).data.nsfw){
@@ -107,6 +120,12 @@ function loadTextures() {
                     }
                 })
                 .catch(error => console.log('error', error));
+            }
+            else{
+                const loader = new THREE.TextureLoader();
+                links.push(image.src);
+                material.push(new THREE.MeshBasicMaterial({ map: loader.load(image.src) }));
+            }
         }
     };
 }
